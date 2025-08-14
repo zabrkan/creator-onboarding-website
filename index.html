@@ -4,12 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Creator Onboarding | Network Media</title>
+  <link rel="icon" type="image/png" href="nm-favicon.png" />
   <style>
     :root {
-      --nm-dark: #1d6a88;
-      --nm-medium: #217a9d;
-      --nm-light: #268bb2;
-      --nm-header: #14495e;
+      /* Network Media colour palette */
+      /* use a deeper navy for backgrounds, medium accent for bullets and highlights */
+      --nm-header: #14495e; /* very dark blue for header */
+      --nm-dark: #1d4f6b;   /* darker blue for phase cards */
+      --nm-medium: #217a9d; /* medium blue for bullets and accents */
+      --nm-light: #2c8fb7;  /* lighter blue for hover/interaction states */
+      --nm-owner: #d8eff7;   /* light tint for owner names */
     }
     * {
       box-sizing: border-box;
@@ -18,14 +22,23 @@
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
         Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-      color: var(--nm-header);
+      color: #ffffff;
       line-height: 1.6;
+      background-color: #0e2b40;
     }
     header {
-      background-color: var(--nm-dark);
+      background-color: var(--nm-header);
       color: #ffffff;
       padding: 2rem 1rem;
       text-align: center;
+    }
+    .logo-container {
+      margin-bottom: 1rem;
+    }
+    .logo-container img {
+      max-width: 220px;
+      width: 100%;
+      height: auto;
     }
     header h1 {
       margin: 0;
@@ -43,7 +56,7 @@
       margin: 0 auto;
     }
     .phase {
-      background: var(--nm-light);
+      background: var(--nm-dark);
       color: #fff;
       margin-bottom: 2rem;
       border-radius: 8px;
@@ -86,9 +99,47 @@
       margin-left: 1rem;
     }
     .phase .steps .substeps li {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       margin-bottom: 0.3rem;
+      position: relative;
+      padding-left: 1rem;
     }
+    .phase .steps .substeps li::before {
+      content: "";
+      position: absolute;
+      left: -0.4rem;
+      top: 0.4rem;
+      width: 0.4rem;
+      height: 0.4rem;
+      background-color: var(--nm-light);
+      border-radius: 50%;
+    }
+    .step-title {
+      font-weight: 600;
+    }
+    /* Badge styling for owners */
+    .step-owners {
+      margin-top: 0.4rem;
+    }
+    .owner-badge {
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      margin: 0.1rem 0.25rem 0 0;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #ffffff;
+      background-color: var(--nm-medium);
+    }
+    /* Specific colours for each owner */
+    .owner-creator { background-color: #2c8fb7; }
+    .owner-nm { background-color: #14495e; }
+    .owner-kosta { background-color: #1d6a88; }
+    .owner-rick { background-color: #268bb2; }
+    .owner-marc { background-color: #217a9d; }
+    .owner-nic { background-color: #3ca8cd; }
+    .owner-grant { background-color: #1d5b82; }
+    .owner-auto { background-color: #4095b2; }
     .program-details {
       margin-top: 0.5rem;
       padding-left: 1rem;
@@ -110,6 +161,9 @@
 </head>
 <body>
   <header>
+    <div class="logo-container">
+      <img src="nm-logo.png" alt="Network Media logo" />
+    </div>
     <h1>Creator Onboarding</h1>
     <p>Your journey from acceptance to monetization</p>
   </header>
@@ -118,46 +172,84 @@
       <section class="phase">
         <h2>Phase 1 – Acceptance &amp; Contracts</h2>
         <ul class="steps">
-          <li><strong>Get Accepted</strong> — Owner: Kosta / Rickey</li>
-          <li><strong>Receive Contract</strong> — Owner: Marc</li>
-          <li><strong>Sign Contract</strong> — Owner: Creator</li>
+          <li>
+            <div class="step-title">Get Accepted</div>
+            <div class="step-owners"><span class="owner-badge owner-kosta">Kosta</span><span class="owner-badge owner-rick">Rick</span></div>
+          </li>
+          <li>
+            <div class="step-title">Receive Contract</div>
+            <div class="step-owners"><span class="owner-badge owner-marc">Marc</span></div>
+          </li>
+          <li>
+            <div class="step-title">Sign Contract</div>
+            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+          </li>
         </ul>
       </section>
       <section class="phase">
         <h2>Phase 2 – Setup &amp; Access</h2>
         <ul class="steps">
-          <li><strong>Acceptance Email</strong> — Owners: Auto / Marc</li>
-          <li><strong>Email CreatorPay</strong> — Owner: Creator</li>
-          <li><strong>Friend Kosta on FB</strong> — Owner: Creator</li>
-          <li><strong>Join NM FB Group</strong> — Owner: Creator + NM</li>
-          <li><strong>Complete Training Videos</strong> — Owner: Creator</li>
-          <li><strong>Get Page via CRE Chat</strong> — Owners: Creator + NM + Nic</li>
+          <li>
+            <div class="step-title">Acceptance Email</div>
+            <div class="step-owners"><span class="owner-badge owner-auto">Auto</span><span class="owner-badge owner-marc">Marc</span></div>
+          </li>
+          <li>
+            <div class="step-title">Email CreatorPay</div>
+            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+          </li>
+          <li>
+            <div class="step-title">Friend Kosta on FB</div>
+            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+          </li>
+          <li>
+            <div class="step-title">Join NM FB Group</div>
+            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span><span class="owner-badge owner-nm">NM</span></div>
+          </li>
+          <li>
+            <div class="step-title">Complete Training Videos</div>
+            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+          </li>
+          <li>
+            <div class="step-title">Get Page via CRE Chat</div>
+            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span><span class="owner-badge owner-nm">NM</span><span class="owner-badge owner-nic">Nic</span></div>
+          </li>
         </ul>
       </section>
       <section class="phase">
         <h2>Phase 3 – First Actions</h2>
         <ul class="steps">
-          <li><strong>Make Videos?</strong> — Owner: Creator</li>
-          <li><strong>Follow NM Group</strong> — Owner: Creator</li>
+          <li>
+            <div class="step-title">Make Videos</div>
+            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+          </li>
+          <li>
+            <div class="step-title">Follow NM Group</div>
+            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+          </li>
         </ul>
       </section>
       <section class="phase">
         <h2>Phase 4 – Optimization</h2>
         <ul class="steps">
-          <li><strong>Review Data</strong> — Owner: Creator</li>
+          <li>
+            <div class="step-title">Review Data</div>
+            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+          </li>
         </ul>
       </section>
       <section class="phase">
         <h2>Phase 5 – Program Integration</h2>
         <ul class="steps">
-          <li><strong>Join Programs</strong> — Owners: Creator + NM
+          <li>
+            <div class="step-title">Join Programs</div>
+            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span><span class="owner-badge owner-nm">NM</span></div>
             <ul class="substeps">
-              <li>Pods — Owner: Nic</li>
-              <li>Remix — Owner: Nic</li>
-              <li>R&amp;R — Owner: Kosta</li>
-              <li>Funded — Owner: Kosta</li>
-              <li>Assistants — Owner: Kosta</li>
-              <li>Actors — Owner: Grant</li>
+              <li><span class="step-title">Pods</span><span class="owner-badge owner-nic">Nic</span></li>
+              <li><span class="step-title">Remix</span><span class="owner-badge owner-nic">Nic</span></li>
+              <li><span class="step-title">R&amp;R</span><span class="owner-badge owner-kosta">Kosta</span></li>
+              <li><span class="step-title">Funded</span><span class="owner-badge owner-kosta">Kosta</span></li>
+              <li><span class="step-title">Assistants</span><span class="owner-badge owner-kosta">Kosta</span></li>
+              <li><span class="step-title">Actors</span><span class="owner-badge owner-grant">Grant</span></li>
             </ul>
           </li>
         </ul>
@@ -165,7 +257,10 @@
       <section class="phase">
         <h2>Phase 6 – Monetization</h2>
         <ul class="steps">
-          <li><strong>Get Monetized</strong> — Owners: Creator + NM</li>
+          <li>
+            <div class="step-title">Get Monetized</div>
+            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span><span class="owner-badge owner-nm">NM</span></div>
+          </li>
         </ul>
       </section>
     </div>
