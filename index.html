@@ -5,206 +5,465 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Creator Onboarding | Network Media</title>
   <link rel="icon" type="image/png" href="nm-favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Network Media colour palette */
-      /* use a deeper navy for backgrounds, medium accent for bullets and highlights */
-      --nm-header: #14495e; /* very dark blue for header */
-      /* update phase card colour to match NM's darker blue brand */
-      --nm-dark: #1d6a88;   /* darker blue for phase cards */
-      --nm-medium: #217a9d; /* medium blue for bullets and accents */
-      --nm-light: #2c8fb7;  /* lighter blue for hover/interaction states */
-      --nm-owner: #d8eff7;   /* light tint for owner names */
+      /* Modern Network Media color palette */
+      --nm-primary: #0f172a;     /* Deep slate for backgrounds */
+      --nm-secondary: #1e293b;   /* Lighter slate for cards */
+      --nm-accent: #3b82f6;      /* Modern blue accent */
+      --nm-accent-light: #60a5fa; /* Light blue for hover states */
+      --nm-accent-dark: #1d4ed8;  /* Dark blue for emphasis */
+      --nm-text-primary: #f8fafc; /* Primary text color */
+      --nm-text-secondary: #cbd5e1; /* Secondary text color */
+      --nm-text-muted: #94a3b8;   /* Muted text color */
+      --nm-border: #334155;       /* Border color */
+      --nm-success: #10b981;      /* Success green */
+      --nm-warning: #f59e0b;      /* Warning amber */
+      --nm-error: #ef4444;        /* Error red */
+      --nm-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
+
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
+
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-        Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-      color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--nm-primary);
+      color: var(--nm-text-primary);
       line-height: 1.6;
-      background-color: #0e2b40;
+      font-size: 16px;
+      overflow-x: hidden;
     }
-    header {
-      background-color: var(--nm-header);
-      color: #ffffff;
-      padding: 2rem 1rem;
-      text-align: center;
-    }
-    .logo-container {
-      margin-bottom: 1rem;
-    }
-    .logo-container img {
-      max-width: 220px;
+
+    /* Background pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: auto;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+      z-index: -1;
+      pointer-events: none;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      letter-spacing: 1px;
+
+    header {
+      background: var(--nm-gradient);
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    header p {
-      margin-top: 0.5rem;
-      font-size: 1.2rem;
-      opacity: 0.9;
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.2);
+      backdrop-filter: blur(10px);
     }
-    main {
-      padding: 2rem 1rem;
-      max-width: 1200px;
+
+    .header-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
       margin: 0 auto;
     }
-    .phase {
-      background: var(--nm-dark);
-      color: #fff;
+
+    .logo-container {
       margin-bottom: 2rem;
-      border-radius: 8px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
     }
+
+    .logo-fallback {
+      width: 60px;
+      height: 60px;
+      background: var(--nm-accent);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 24px;
+      color: white;
+      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--nm-text-primary);
+      letter-spacing: -0.025em;
+    }
+
+    header h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      font-size: 1.25rem;
+      color: var(--nm-text-secondary);
+      font-weight: 400;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    main {
+      padding: 4rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .phase {
+      background: var(--nm-secondary);
+      border: 1px solid var(--nm-border);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+
+    .phase::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--nm-gradient);
+      border-radius: 20px 20px 0 0;
+    }
+
     .phase:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+      border-color: var(--nm-accent);
     }
+
     .phase h2 {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-      font-size: 1.6rem;
-      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--nm-text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
-    .phase .steps {
-      margin: 0;
-      padding-left: 1.5rem;
-      list-style-type: none;
-    }
-    .phase .steps li {
-      position: relative;
-      padding-left: 1rem;
-      margin-bottom: 0.5rem;
-    }
-    .phase .steps li::before {
-      content: "";
-      position: absolute;
-      left: -0.4rem;
-      top: 0.5rem;
-      width: 0.6rem;
-      height: 0.6rem;
-      background-color: var(--nm-medium);
+
+    .phase-number {
+      width: 32px;
+      height: 32px;
+      background: var(--nm-accent);
       border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: white;
     }
-    .phase .steps .substeps {
-      margin-top: 0.5rem;
-      margin-left: 1rem;
+
+    .steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
-    .phase .steps .substeps li {
-      font-size: 0.85rem;
-      margin-bottom: 0.3rem;
+
+    .steps li {
+      background: rgba(59, 130, 246, 0.05);
+      border: 1px solid rgba(59, 130, 246, 0.1);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: all 0.2s ease;
       position: relative;
-      padding-left: 1rem;
     }
-    .phase .steps .substeps li::before {
-      content: "";
-      position: absolute;
-      left: -0.4rem;
-      top: 0.4rem;
-      width: 0.4rem;
-      height: 0.4rem;
-      background-color: var(--nm-light);
-      border-radius: 50%;
+
+    .steps li:hover {
+      background: rgba(59, 130, 246, 0.1);
+      border-color: rgba(59, 130, 246, 0.2);
+      transform: translateX(4px);
     }
+
     .step-title {
       font-weight: 600;
+      font-size: 1rem;
+      color: var(--nm-text-primary);
+      margin-bottom: 0.75rem;
     }
-    /* Badge styling for owners */
+
     .step-owners {
-      margin-top: 0.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
     }
+
     .owner-badge {
-      display: inline-block;
-      padding: 0.15rem 0.6rem;
-      margin: 0.1rem 0.25rem 0 0;
-      border-radius: 9999px;
+      padding: 0.375rem 0.75rem;
+      border-radius: 20px;
       font-size: 0.75rem;
       font-weight: 500;
-      color: #ffffff;
-      background-color: var(--nm-medium);
+      color: white;
+      background: var(--nm-accent);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.2s ease;
+      backdrop-filter: blur(10px);
     }
-    /* Specific colours for each owner */
-    .owner-creator { background-color: #2c8fb7; }
-    .owner-nm { background-color: #14495e; }
-    .owner-kosta { background-color: #1d6a88; }
-    .owner-rick { background-color: #268bb2; }
-    .owner-marc { background-color: #217a9d; }
-    .owner-nic { background-color: #3ca8cd; }
-    .owner-grant { background-color: #1d5b82; }
-    .owner-auto { background-color: #4095b2; }
-    .program-details {
-      margin-top: 0.5rem;
+
+    .owner-badge:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    /* Modern owner colors */
+    .owner-creator { background: linear-gradient(135deg, #10b981, #059669); }
+    .owner-nm { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+    .owner-kosta { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .owner-rick { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .owner-marc { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    .owner-nic { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+    .owner-grant { background: linear-gradient(135deg, #84cc16, #65a30d); }
+    .owner-auto { background: linear-gradient(135deg, #6b7280, #4b5563); }
+
+    .substeps {
+      margin-top: 1rem;
       padding-left: 1rem;
+      border-left: 2px solid var(--nm-accent);
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
     }
-    footer {
-      background-color: var(--nm-header);
-      color: #ffffff;
-      text-align: center;
+
+    .substeps li {
+      background: rgba(59, 130, 246, 0.03);
+      border: 1px solid rgba(59, 130, 246, 0.08);
       padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
-    @media (min-width: 700px) {
+
+    .substeps .step-title {
+      margin-bottom: 0;
+      font-size: 0.875rem;
+    }
+
+    .substeps .owner-badge {
+      font-size: 0.6875rem;
+      padding: 0.25rem 0.5rem;
+    }
+
+    footer {
+      background: var(--nm-secondary);
+      border-top: 1px solid var(--nm-border);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    footer p {
+      color: var(--nm-text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* Progress indicator */
+    .progress-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: rgba(59, 130, 246, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+
+    .progress-step {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--nm-border);
+      transition: all 0.3s ease;
+    }
+
+    .progress-step.active {
+      background: var(--nm-accent);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    }
+
+    .progress-line {
+      width: 40px;
+      height: 2px;
+      background: var(--nm-border);
+      border-radius: 1px;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      header {
+        padding: 3rem 1rem;
+      }
+      
+      main {
+        padding: 2rem 1rem;
+      }
+      
       .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 2rem;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .phase {
+        padding: 1.5rem;
+      }
+      
+      .progress-container {
+        flex-wrap: wrap;
+        gap: 0.5rem;
       }
     }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .phase {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .phase:nth-child(1) { animation-delay: 0.1s; }
+    .phase:nth-child(2) { animation-delay: 0.2s; }
+    .phase:nth-child(3) { animation-delay: 0.3s; }
+    .phase:nth-child(4) { animation-delay: 0.4s; }
+    .phase:nth-child(5) { animation-delay: 0.5s; }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo-container">
-      <img src="nm-logo.png" alt="Network Media logo" />
+    <div class="header-content">
+      <div class="logo-container">
+        <div class="logo-fallback">NM</div>
+        <div class="logo-text">Network Media</div>
+      </div>
+      <h1>Creator Onboarding</h1>
+      <p>Your streamlined journey from acceptance to monetization</p>
     </div>
-    <h1>Creator Onboarding</h1>
-    <p>Your journey from acceptance to monetization</p>
   </header>
+
   <main>
+    <div class="progress-container">
+      <div class="progress-step active"></div>
+      <div class="progress-line"></div>
+      <div class="progress-step"></div>
+      <div class="progress-line"></div>
+      <div class="progress-step"></div>
+      <div class="progress-line"></div>
+      <div class="progress-step"></div>
+      <div class="progress-line"></div>
+      <div class="progress-step"></div>
+    </div>
+
     <div class="grid-container">
       <section class="phase">
-        <h2>Phase 1 – Acceptance &amp; Contracts</h2>
+        <h2>
+          <div class="phase-number">1</div>
+          Acceptance & Contracts
+        </h2>
         <ul class="steps">
           <li>
             <div class="step-title">Get Accepted</div>
-            <div class="step-owners"><span class="owner-badge owner-kosta">Kosta</span><span class="owner-badge owner-rick">Rick</span></div>
+            <div class="step-owners">
+              <span class="owner-badge owner-kosta">Kosta</span>
+              <span class="owner-badge owner-rick">Rick</span>
+            </div>
           </li>
           <li>
             <div class="step-title">Receive Contract</div>
-            <div class="step-owners"><span class="owner-badge owner-marc">Marc</span></div>
+            <div class="step-owners">
+              <span class="owner-badge owner-marc">Marc</span>
+            </div>
           </li>
           <li>
             <div class="step-title">Sign Contract</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+            <div class="step-owners">
+              <span class="owner-badge owner-creator">Creator</span>
+            </div>
           </li>
           <li>
             <div class="step-title">Acceptance Email</div>
-            <div class="step-owners"><span class="owner-badge owner-auto">Auto</span><span class="owner-badge owner-marc">Marc</span></div>
+            <div class="step-owners">
+              <span class="owner-badge owner-auto">Auto</span>
+              <span class="owner-badge owner-marc">Marc</span>
+            </div>
           </li>
         </ul>
       </section>
+
       <section class="phase">
-        <h2>Phase 2 – Setup &amp; Access</h2>
+        <h2>
+          <div class="phase-number">2</div>
+          Setup & Access
+        </h2>
         <ul class="steps">
           <li>
             <div class="step-title">Email CreatorPay</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+            <div class="step-owners">
+              <span class="owner-badge owner-creator">Creator</span>
+            </div>
           </li>
           <li>
             <div class="step-title">Friend Kosta on FB</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+            <div class="step-owners">
+              <span class="owner-badge owner-creator">Creator</span>
+            </div>
           </li>
           <li>
             <div class="step-title">Join NM FB Group</div>
-            <!-- update owners: both Creator and Kosta are responsible for onboarding into the FB group -->
             <div class="step-owners">
               <span class="owner-badge owner-creator">Creator</span>
               <span class="owner-badge owner-kosta">Kosta</span>
@@ -212,74 +471,131 @@
           </li>
           <li>
             <div class="step-title">Complete Training Videos</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+            <div class="step-owners">
+              <span class="owner-badge owner-creator">Creator</span>
+            </div>
           </li>
           <li>
             <div class="step-title">Get Page via CRE Chat</div>
-            <!-- break this task into sequential sub‑steps to show the flow: Kosta sets up, Creator chooses name, Nic creates page -->
             <ul class="substeps">
-              <li><span class="step-title">Kosta sets up</span><span class="owner-badge owner-kosta">Kosta</span></li>
-              <li><span class="step-title">Creator chooses name</span><span class="owner-badge owner-creator">Creator</span></li>
-              <li><span class="step-title">Nic creates page</span><span class="owner-badge owner-nic">Nic</span></li>
+              <li>
+                <span class="step-title">Kosta sets up</span>
+                <span class="owner-badge owner-kosta">Kosta</span>
+              </li>
+              <li>
+                <span class="step-title">Creator chooses name</span>
+                <span class="owner-badge owner-creator">Creator</span>
+              </li>
+              <li>
+                <span class="step-title">Nic creates page</span>
+                <span class="owner-badge owner-nic">Nic</span>
+              </li>
             </ul>
           </li>
         </ul>
       </section>
+
       <section class="phase">
-        <h2>Phase 3 – Next Steps</h2>
+        <h2>
+          <div class="phase-number">3</div>
+          Next Steps
+        </h2>
         <ul class="steps">
           <li>
             <div class="step-title">Make Videos</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+            <div class="step-owners">
+              <span class="owner-badge owner-creator">Creator</span>
+            </div>
           </li>
           <li>
             <div class="step-title">Follow NM Group</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+            <div class="step-owners">
+              <span class="owner-badge owner-creator">Creator</span>
+            </div>
           </li>
           <li>
             <div class="step-title">Review Data</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+            <div class="step-owners">
+              <span class="owner-badge owner-creator">Creator</span>
+            </div>
           </li>
         </ul>
       </section>
+
       <section class="phase">
-        <h2>Phase 4 – Program Integration</h2>
+        <h2>
+          <div class="phase-number">4</div>
+          Program Integration
+        </h2>
         <ul class="steps">
           <li>
             <div class="step-title">Join Programs</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span><span class="owner-badge owner-nm">NM</span></div>
+            <div class="step-owners">
+              <span class="owner-badge owner-creator">Creator</span>
+              <span class="owner-badge owner-nm">NM</span>
+            </div>
             <ul class="substeps">
-              <li><span class="step-title">Pods</span><span class="owner-badge owner-nic">Nic</span></li>
-              <li><span class="step-title">Remix</span><span class="owner-badge owner-nic">Nic</span></li>
-              <li><span class="step-title">Rewind &amp; Review</span><span class="owner-badge owner-kosta">Kosta</span></li>
-              <li><span class="step-title">Funded</span><span class="owner-badge owner-kosta">Kosta</span></li>
-              <li><span class="step-title">Assistants</span><span class="owner-badge owner-kosta">Kosta</span></li>
-              <li><span class="step-title">Actors</span><span class="owner-badge owner-grant">Grant</span></li>
+              <li>
+                <span class="step-title">Pods</span>
+                <span class="owner-badge owner-nic">Nic</span>
+              </li>
+              <li>
+                <span class="step-title">Remix</span>
+                <span class="owner-badge owner-nic">Nic</span>
+              </li>
+              <li>
+                <span class="step-title">Rewind & Review</span>
+                <span class="owner-badge owner-kosta">Kosta</span>
+              </li>
+              <li>
+                <span class="step-title">Funded</span>
+                <span class="owner-badge owner-kosta">Kosta</span>
+              </li>
+              <li>
+                <span class="step-title">Assistants</span>
+                <span class="owner-badge owner-kosta">Kosta</span>
+              </li>
+              <li>
+                <span class="step-title">Actors</span>
+                <span class="owner-badge owner-grant">Grant</span>
+              </li>
             </ul>
           </li>
         </ul>
       </section>
+
       <section class="phase">
-        <h2>Phase 5 – Monetization</h2>
+        <h2>
+          <div class="phase-number">5</div>
+          Monetization
+        </h2>
         <ul class="steps">
           <li>
             <div class="step-title">Get Monetized</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span><span class="owner-badge owner-nm">NM</span></div>
+            <div class="step-owners">
+              <span class="owner-badge owner-creator">Creator</span>
+              <span class="owner-badge owner-nm">NM</span>
+            </div>
           </li>
           <li>
             <div class="step-title">Review Data</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+            <div class="step-owners">
+              <span class="owner-badge owner-creator">Creator</span>
+            </div>
           </li>
           <li>
             <div class="step-title">Double Down on What Is Performing</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
+            <div class="step-owners">
+              <span class="owner-badge owner-creator">Creator</span>
+            </div>
           </li>
         </ul>
       </section>
     </div>
   </main>
+
   <footer>
-    &copy; 2025 Network Media
+    <p>&copy; 2025 Network Media. All rights reserved.</p>
   </footer>
 </body>
 </html>
