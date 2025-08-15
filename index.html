@@ -10,7 +10,8 @@
       /* Network Media colour palette */
       /* use a deeper navy for backgrounds, medium accent for bullets and highlights */
       --nm-header: #14495e; /* very dark blue for header */
-      --nm-dark: #1d4f6b;   /* darker blue for phase cards */
+      /* update phase card colour to match NM's darker blue brand */
+      --nm-dark: #1d6a88;   /* darker blue for phase cards */
       --nm-medium: #217a9d; /* medium blue for bullets and accents */
       --nm-light: #2c8fb7;  /* lighter blue for hover/interaction states */
       --nm-owner: #d8eff7;   /* light tint for owner names */
@@ -203,7 +204,11 @@
           </li>
           <li>
             <div class="step-title">Join NM FB Group</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span><span class="owner-badge owner-nm">NM</span></div>
+            <!-- update owners: both Creator and Kosta are responsible for onboarding into the FB group -->
+            <div class="step-owners">
+              <span class="owner-badge owner-creator">Creator</span>
+              <span class="owner-badge owner-kosta">Kosta</span>
+            </div>
           </li>
           <li>
             <div class="step-title">Complete Training Videos</div>
@@ -211,7 +216,12 @@
           </li>
           <li>
             <div class="step-title">Get Page via CRE Chat</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span><span class="owner-badge owner-kosta">Kosta</span><span class="owner-badge owner-nic">Nic</span></div>
+            <!-- break this task into sequential sub‑steps to show the flow: Kosta sets up, Creator chooses name, Nic creates page -->
+            <ul class="substeps">
+              <li><span class="step-title">Kosta sets up</span><span class="owner-badge owner-kosta">Kosta</span></li>
+              <li><span class="step-title">Creator chooses name</span><span class="owner-badge owner-creator">Creator</span></li>
+              <li><span class="step-title">Nic creates page</span><span class="owner-badge owner-nic">Nic</span></li>
+            </ul>
           </li>
         </ul>
       </section>
