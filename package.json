@@ -1,0 +1,13 @@
+{
+  "name": "creator-onboarding",
+  "version": "1.0.0",
+  "description": "Network Media Creator Onboarding Process Overview",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 3000",
+    "dev": "python3 -m http.server 3000"
+  },
+  "keywords": ["creator", "onboarding", "network-media"],
+  "author": "Network Media",
+  "license": "ISC"
+}
