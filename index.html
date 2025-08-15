@@ -8,20 +8,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Modern Network Media color palette */
-      --nm-primary: #0f172a;     /* Deep slate for backgrounds */
-      --nm-secondary: #1e293b;   /* Lighter slate for cards */
-      --nm-accent: #3b82f6;      /* Modern blue accent */
-      --nm-accent-light: #60a5fa; /* Light blue for hover states */
-      --nm-accent-dark: #1d4ed8;  /* Dark blue for emphasis */
-      --nm-text-primary: #f8fafc; /* Primary text color */
-      --nm-text-secondary: #cbd5e1; /* Secondary text color */
-      --nm-text-muted: #94a3b8;   /* Muted text color */
-      --nm-border: #334155;       /* Border color */
-      --nm-success: #10b981;      /* Success green */
-      --nm-warning: #f59e0b;      /* Warning amber */
-      --nm-error: #ef4444;        /* Error red */
-      --nm-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      /* Network Media brand-inspired color palette */
+      --nm-primary: #0a0a0a;        /* Deep black background */
+      --nm-secondary: #1a1a1a;      /* Card backgrounds */
+      --nm-accent: #ff6b35;         /* Orange accent from logo */
+      --nm-accent-light: #ff8c5a;   /* Light orange for hover */
+      --nm-accent-dark: #e55a2b;    /* Dark orange for emphasis */
+      --nm-blue: #4a90e2;          /* Blue from logo */
+      --nm-blue-light: #6ba3e8;    /* Light blue */
+      --nm-text-primary: #ffffff;   /* Pure white text */
+      --nm-text-secondary: #e0e0e0; /* Light gray text */
+      --nm-text-muted: #a0a0a0;     /* Muted gray text */
+      --nm-border: #333333;         /* Subtle borders */
+      --nm-success: #00d4aa;        /* Modern teal */
+      --nm-warning: #ffb800;        /* Bright yellow */
+      --nm-error: #ff4757;          /* Modern red */
+      --nm-gradient: linear-gradient(135deg, #ff6b35 0%, #4a90e2 100%);
+      --nm-card-gradient: linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 100%);
     }
 
     * {
@@ -48,30 +51,21 @@
       width: 100%;
       height: 100%;
       background: 
-        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(74, 144, 226, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 107, 53, 0.04) 0%, transparent 50%);
       z-index: -1;
       pointer-events: none;
     }
 
     header {
-      background: var(--nm-gradient);
-      padding: 4rem 2rem;
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(74, 144, 226, 0.1) 100%);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--nm-border);
+      padding: 3rem 2rem;
       text-align: center;
       position: relative;
       overflow: hidden;
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(15, 23, 42, 0.2);
-      backdrop-filter: blur(10px);
     }
 
     .header-content {
@@ -82,39 +76,29 @@
     }
 
     .logo-container {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
-    .logo-fallback {
-      width: 60px;
-      height: 60px;
-      background: var(--nm-accent);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 24px;
-      color: white;
-      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+    .logo-image {
+      height: 80px;
+      width: auto;
+      filter: drop-shadow(0 10px 25px rgba(255, 107, 53, 0.3));
+      transition: transform 0.3s ease;
     }
 
-    .logo-text {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--nm-text-primary);
-      letter-spacing: -0.025em;
+    .logo-image:hover {
+      transform: scale(1.05);
     }
 
     header h1 {
       font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 700;
       margin-bottom: 1rem;
-      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #ff6b35 50%, #4a90e2 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -143,14 +127,15 @@
     }
 
     .phase {
-      background: var(--nm-secondary);
+      background: var(--nm-card-gradient);
       border: 1px solid var(--nm-border);
-      border-radius: 20px;
-      padding: 2rem;
+      border-radius: 24px;
+      padding: 2.5rem;
       position: relative;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(20px);
       overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
 
     .phase::before {
@@ -159,20 +144,20 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 4px;
+      height: 5px;
       background: var(--nm-gradient);
-      border-radius: 20px 20px 0 0;
+      border-radius: 24px 24px 0 0;
     }
 
     .phase:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-      border-color: var(--nm-accent);
+      transform: translateY(-12px);
+      box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4);
+      border-color: rgba(255, 107, 53, 0.5);
     }
 
     .phase h2 {
-      font-size: 1.5rem;
-      font-weight: 600;
+      font-size: 1.75rem;
+      font-weight: 700;
       margin-bottom: 1.5rem;
       color: var(--nm-text-primary);
       display: flex;
@@ -181,16 +166,17 @@
     }
 
     .phase-number {
-      width: 32px;
-      height: 32px;
-      background: var(--nm-accent);
+      width: 40px;
+      height: 40px;
+      background: var(--nm-gradient);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.875rem;
-      font-weight: 600;
+      font-size: 1rem;
+      font-weight: 700;
       color: white;
+      box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
     }
 
     .steps {
@@ -201,18 +187,19 @@
     }
 
     .steps li {
-      background: rgba(59, 130, 246, 0.05);
-      border: 1px solid rgba(59, 130, 246, 0.1);
-      border-radius: 12px;
+      background: rgba(255, 107, 53, 0.08);
+      border: 1px solid rgba(255, 107, 53, 0.15);
+      border-radius: 16px;
       padding: 1.25rem;
       transition: all 0.2s ease;
       position: relative;
+      backdrop-filter: blur(10px);
     }
 
     .steps li:hover {
-      background: rgba(59, 130, 246, 0.1);
-      border-color: rgba(59, 130, 246, 0.2);
-      transform: translateX(4px);
+      background: rgba(255, 107, 53, 0.12);
+      border-color: rgba(255, 107, 53, 0.3);
+      transform: translateX(8px);
     }
 
     .step-title {
@@ -231,30 +218,31 @@
 
     .owner-badge {
       padding: 0.375rem 0.75rem;
-      border-radius: 20px;
+      border-radius: 24px;
       font-size: 0.75rem;
-      font-weight: 500;
+      font-weight: 600;
       color: white;
-      background: var(--nm-accent);
+      background: var(--nm-gradient);
       border: 1px solid rgba(255, 255, 255, 0.1);
       transition: all 0.2s ease;
       backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
     .owner-badge:hover {
       transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 4px 16px rgba(255, 107, 53, 0.4);
     }
 
-    /* Modern owner colors */
-    .owner-creator { background: linear-gradient(135deg, #10b981, #059669); }
-    .owner-nm { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-    .owner-kosta { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
-    .owner-rick { background: linear-gradient(135deg, #f59e0b, #d97706); }
-    .owner-marc { background: linear-gradient(135deg, #ef4444, #dc2626); }
-    .owner-nic { background: linear-gradient(135deg, #06b6d4, #0891b2); }
-    .owner-grant { background: linear-gradient(135deg, #84cc16, #65a30d); }
-    .owner-auto { background: linear-gradient(135deg, #6b7280, #4b5563); }
+    /* Brand-aligned owner colors */
+    .owner-creator { background: linear-gradient(135deg, #00d4aa, #00b894); }
+    .owner-nm { background: linear-gradient(135deg, #ff6b35, #e55a2b); }
+    .owner-kosta { background: linear-gradient(135deg, #4a90e2, #357abd); }
+    .owner-rick { background: linear-gradient(135deg, #ffb800, #e6a600); }
+    .owner-marc { background: linear-gradient(135deg, #ff4757, #e84057); }
+    .owner-nic { background: linear-gradient(135deg, #5f27cd, #4834d4); }
+    .owner-grant { background: linear-gradient(135deg, #00d2d3, #01a3a4); }
+    .owner-auto { background: linear-gradient(135deg, #747d8c, #57606f); }
 
     .substeps {
       margin-top: 1rem;
@@ -267,10 +255,10 @@
     }
 
     .substeps li {
-      background: rgba(59, 130, 246, 0.03);
-      border: 1px solid rgba(59, 130, 246, 0.08);
+      background: rgba(255, 107, 53, 0.04);
+      border: 1px solid rgba(255, 107, 53, 0.1);
       padding: 1rem;
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 0.875rem;
       display: flex;
       align-items: center;
@@ -290,11 +278,12 @@
     }
 
     footer {
-      background: var(--nm-secondary);
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(74, 144, 226, 0.05) 100%);
       border-top: 1px solid var(--nm-border);
       padding: 2rem;
       text-align: center;
       margin-top: 4rem;
+      backdrop-filter: blur(20px);
     }
 
     footer p {
@@ -309,30 +298,31 @@
       align-items: center;
       gap: 1rem;
       margin: 2rem 0;
-      padding: 1.5rem;
-      background: rgba(59, 130, 246, 0.05);
-      border-radius: 16px;
-      border: 1px solid rgba(59, 130, 246, 0.1);
+      padding: 2rem;
+      background: rgba(255, 107, 53, 0.08);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 107, 53, 0.15);
+      backdrop-filter: blur(20px);
     }
 
     .progress-step {
-      width: 12px;
-      height: 12px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       background: var(--nm-border);
       transition: all 0.3s ease;
     }
 
     .progress-step.active {
-      background: var(--nm-accent);
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+      background: var(--nm-gradient);
+      box-shadow: 0 0 24px rgba(255, 107, 53, 0.6);
     }
 
     .progress-line {
-      width: 40px;
-      height: 2px;
+      width: 48px;
+      height: 3px;
       background: var(--nm-border);
-      border-radius: 1px;
+      border-radius: 2px;
     }
 
     /* Responsive design */
@@ -387,8 +377,7 @@
   <header>
     <div class="header-content">
       <div class="logo-container">
-        <div class="logo-fallback">NM</div>
-        <div class="logo-text">Network Media</div>
+        <img src="public/2025 NM wide logo_black bubble.png" alt="Network Media Logo" class="logo-image">
       </div>
       <h1>Creator Onboarding</h1>
       <p>Your streamlined journey from acceptance to monetization</p>
