@@ -5,295 +5,660 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Creator Onboarding | Network Media</title>
   <link rel="icon" type="image/png" href="nm-favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Network Media colour palette */
-      /* use a deeper navy for backgrounds, medium accent for bullets and highlights */
-      --nm-header: #14495e; /* very dark blue for header */
-      /* update phase card colour to match NM's darker blue brand */
-      --nm-dark: #1d6a88;   /* darker blue for phase cards */
-      --nm-medium: #217a9d; /* medium blue for bullets and accents */
-      --nm-light: #2c8fb7;  /* lighter blue for hover/interaction states */
-      --nm-owner: #d8eff7;   /* light tint for owner names */
+      --nm-orange: #ff6b35;
+      --nm-blue: #4a90e2;
+      --nm-dark-blue: #2c5aa0;
+      --nm-light-blue: #e8f4fd;
+      --nm-dark: #1a1a2e;
+      --nm-gray: #16213e;
+      --nm-light-gray: #f8fafc;
+      --nm-text: #334155;
+      --nm-text-light: #64748b;
     }
+
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
+
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-        Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-      color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, var(--nm-dark) 0%, var(--nm-gray) 100%);
+      color: white;
       line-height: 1.6;
-      background-color: #0e2b40;
+      min-height: 100vh;
     }
-    header {
-      background-color: var(--nm-header);
-      color: #ffffff;
-      padding: 2rem 1rem;
-      text-align: center;
-    }
-    .logo-container {
-      margin-bottom: 1rem;
-    }
-    .logo-container img {
-      max-width: 220px;
-      width: 100%;
-      height: auto;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      letter-spacing: 1px;
-    }
-    header p {
-      margin-top: 0.5rem;
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
-    main {
-      padding: 2rem 1rem;
-      max-width: 1200px;
+
+    .container {
+      max-width: 1400px;
       margin: 0 auto;
+      padding: 0 2rem;
     }
-    .phase {
-      background: var(--nm-dark);
-      color: #fff;
-      margin-bottom: 2rem;
-      border-radius: 8px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s, box-shadow 0.2s;
+
+    /* Header */
+    header {
+      padding: 2rem 0;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    .phase:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+
+    .logo {
+      max-width: 300px;
+      height: auto;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
     }
-    .phase h2 {
-      margin-top: 0;
+
+    .header-content h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
       margin-bottom: 0.5rem;
-      font-size: 1.6rem;
-      color: #ffffff;
+      background: linear-gradient(135deg, var(--nm-orange), var(--nm-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .phase .steps {
-      margin: 0;
-      padding-left: 1.5rem;
-      list-style-type: none;
+
+    .header-content p {
+      font-size: 1.2rem;
+      opacity: 0.8;
+      font-weight: 300;
     }
-    .phase .steps li {
+
+    /* Timeline Container */
+    .timeline-container {
+      padding: 4rem 0;
       position: relative;
-      padding-left: 1rem;
-      margin-bottom: 0.5rem;
     }
-    .phase .steps li::before {
-      content: "";
-      position: absolute;
-      left: -0.4rem;
-      top: 0.5rem;
-      width: 0.6rem;
-      height: 0.6rem;
-      background-color: var(--nm-medium);
-      border-radius: 50%;
-    }
-    .phase .steps .substeps {
-      margin-top: 0.5rem;
-      margin-left: 1rem;
-    }
-    .phase .steps .substeps li {
-      font-size: 0.85rem;
-      margin-bottom: 0.3rem;
+
+    .timeline {
       position: relative;
-      padding-left: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
     }
-    .phase .steps .substeps li::before {
-      content: "";
+
+    /* Timeline Line */
+    .timeline::before {
+      content: '';
       position: absolute;
-      left: -0.4rem;
-      top: 0.4rem;
-      width: 0.4rem;
-      height: 0.4rem;
-      background-color: var(--nm-light);
-      border-radius: 50%;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--nm-orange), var(--nm-blue));
+      transform: translateX(-50%);
+      border-radius: 2px;
+      box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
     }
-    .step-title {
+
+    /* Phase Items */
+    .phase-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .phase-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    /* Phase Number Circle */
+    .phase-number {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--nm-orange), var(--nm-blue));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+      z-index: 10;
+    }
+
+    /* Phase Content */
+    .phase-content {
+      flex: 1;
+      max-width: 45%;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phase-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--nm-orange), var(--nm-blue));
+    }
+
+    .phase-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .phase-title {
+      font-size: 1.5rem;
       font-weight: 600;
+      margin-bottom: 1rem;
+      color: white;
     }
-    /* Badge styling for owners */
+
+    /* Steps List */
+    .steps-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .step-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+
+    .step-icon {
+      width: 8px;
+      height: 8px;
+      background: var(--nm-orange);
+      border-radius: 50%;
+      margin-top: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-title {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+
     .step-owners {
-      margin-top: 0.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
+
     .owner-badge {
-      display: inline-block;
-      padding: 0.15rem 0.6rem;
-      margin: 0.1rem 0.25rem 0 0;
-      border-radius: 9999px;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
       font-size: 0.75rem;
       font-weight: 500;
-      color: #ffffff;
-      background-color: var(--nm-medium);
+      background: var(--nm-blue);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
-    /* Specific colours for each owner */
-    .owner-creator { background-color: #2c8fb7; }
-    .owner-nm { background-color: #14495e; }
-    .owner-kosta { background-color: #1d6a88; }
-    .owner-rick { background-color: #268bb2; }
-    .owner-marc { background-color: #217a9d; }
-    .owner-nic { background-color: #3ca8cd; }
-    .owner-grant { background-color: #1d5b82; }
-    .owner-auto { background-color: #4095b2; }
-    .program-details {
-      margin-top: 0.5rem;
+
+    .owner-creator { background: var(--nm-orange); }
+    .owner-nm { background: var(--nm-dark-blue); }
+    .owner-kosta { background: #8b5cf6; }
+    .owner-rick { background: #06b6d4; }
+    .owner-marc { background: #10b981; }
+    .owner-nic { background: #f59e0b; }
+    .owner-grant { background: #ef4444; }
+    .owner-auto { background: #6366f1; }
+
+    /* Substeps */
+    .substeps {
+      margin-top: 1rem;
       padding-left: 1rem;
+      border-left: 2px solid rgba(255, 107, 53, 0.3);
     }
+
+    .substep-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .substep-icon {
+      width: 6px;
+      height: 6px;
+      background: var(--nm-blue);
+      border-radius: 50%;
+    }
+
+    /* Progress Indicator */
+    .progress-indicator {
+      position: fixed;
+      top: 50%;
+      right: 2rem;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 100;
+    }
+
+    .progress-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .progress-dot.active {
+      background: var(--nm-orange);
+      box-shadow: 0 0 15px rgba(255, 107, 53, 0.6);
+    }
+
+    /* Footer */
     footer {
-      background-color: var(--nm-header);
-      color: #ffffff;
       text-align: center;
-      padding: 1rem;
+      padding: 2rem 0;
+      background: rgba(0, 0, 0, 0.3);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
-    @media (min-width: 700px) {
-      .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 2rem;
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .timeline::before {
+        left: 2rem;
+      }
+      
+      .phase-number {
+        left: 2rem;
+      }
+      
+      .phase-item,
+      .phase-item:nth-child(even) {
+        flex-direction: row;
+        padding-left: 5rem;
+      }
+      
+      .phase-content {
+        max-width: 100%;
+      }
+      
+      .progress-indicator {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+      
+      .header-content h1 {
+        font-size: 2rem;
+      }
+      
+      .phase-content {
+        padding: 1.5rem;
+      }
+      
+      .timeline-container {
+        padding: 2rem 0;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo-container">
-      <img src="nm-logo.png" alt="Network Media logo" />
+    <div class="container">
+      <img src="public/2025 NM wide logo_black bubble.png" alt="Network Media" class="logo" />
+      <div class="header-content">
+        <h1>Creator Onboarding Journey</h1>
+        <p>Your path from acceptance to monetization</p>
+      </div>
     </div>
-    <h1>Creator Onboarding</h1>
-    <p>Your journey from acceptance to monetization</p>
   </header>
-  <main>
-    <div class="grid-container">
-      <section class="phase">
-        <h2>Phase 1 – Acceptance &amp; Contracts</h2>
-        <ul class="steps">
-          <li>
-            <div class="step-title">Get Accepted</div>
-            <div class="step-owners"><span class="owner-badge owner-kosta">Kosta</span><span class="owner-badge owner-rick">Rick</span></div>
-          </li>
-          <li>
-            <div class="step-title">Receive Contract</div>
-            <div class="step-owners"><span class="owner-badge owner-marc">Marc</span></div>
-          </li>
-          <li>
-            <div class="step-title">Sign Contract</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
-          </li>
-          <li>
-            <div class="step-title">Acceptance Email</div>
-            <div class="step-owners"><span class="owner-badge owner-auto">Auto</span><span class="owner-badge owner-marc">Marc</span></div>
-          </li>
-        </ul>
-      </section>
-      <section class="phase">
-        <h2>Phase 2 – Setup &amp; Access</h2>
-        <ul class="steps">
-          <li>
-            <div class="step-title">Email CreatorPay</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
-          </li>
-          <li>
-            <div class="step-title">Friend Kosta on FB</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
-          </li>
-          <li>
-            <div class="step-title">Join NM FB Group</div>
-            <!-- ensure the order of badges is Kosta first, then Creator -->
-            <div class="step-owners">
-              <span class="owner-badge owner-kosta">Kosta</span>
-              <span class="owner-badge owner-creator">Creator</span>
-            </div>
-          </li>
-          <li>
-            <div class="step-title">Complete Training Videos</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
-          </li>
-          <li>
-            <div class="step-title">Get Page via CRE Chat</div>
-            <!-- break this task into sequential sub‑steps to show the flow: Kosta sets up, Creator chooses name, Nic creates page -->
-            <ul class="substeps">
-              <li><span class="step-title">Kosta sets up</span><span class="owner-badge owner-kosta">Kosta</span></li>
-              <li><span class="step-title">Creator chooses name</span><span class="owner-badge owner-creator">Creator</span></li>
-              <li><span class="step-title">Nic creates page</span><span class="owner-badge owner-nic">Nic</span></li>
+
+  <main class="timeline-container">
+    <div class="container">
+      <div class="timeline">
+        
+        <!-- Phase 1 -->
+        <div class="phase-item">
+          <div class="phase-number">1</div>
+          <div class="phase-content">
+            <h2 class="phase-title">Acceptance & Contracts</h2>
+            <ul class="steps-list">
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Get Accepted</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-kosta">Kosta</span>
+                    <span class="owner-badge owner-rick">Rick</span>
+                  </div>
+                </div>
+              </li>
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Receive Contract</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-marc">Marc</span>
+                  </div>
+                </div>
+              </li>
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Sign Contract</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-creator">Creator</span>
+                  </div>
+                </div>
+              </li>
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Acceptance Email</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-auto">Auto</span>
+                    <span class="owner-badge owner-marc">Marc</span>
+                  </div>
+                </div>
+              </li>
             </ul>
-          </li>
-        </ul>
-      </section>
-      <section class="phase">
-        <h2>Phase 3 – Next Steps</h2>
-        <ul class="steps">
-          <li>
-            <div class="step-title">Read NM Group posts</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
-          </li>
-          <li>
-            <div class="step-title">Join Relevant Chats</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
-          </li>
-          <li>
-            <div class="step-title">Make Videos</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
-          </li>
-          <li>
-            <div class="step-title">Review Data</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
-          </li>
-          <li>
-            <div class="step-title">Double Down on What Is Performing</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
-          </li>
-        </ul>
-      </section>
-      <section class="phase">
-        <h2>Phase 4 – Program Integration</h2>
-        <ul class="steps">
-          <li>
-            <div class="step-title">Join Programs</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span><span class="owner-badge owner-nm">NM</span></div>
-            <ul class="substeps">
-              <li><span class="step-title">Pods</span><span class="owner-badge owner-nic">Nic</span></li>
-              <li><span class="step-title">Remix</span><span class="owner-badge owner-nic">Nic</span></li>
-              <li><span class="step-title">Rewind &amp; Review</span><span class="owner-badge owner-kosta">Kosta</span></li>
-              <li><span class="step-title">Funded</span><span class="owner-badge owner-kosta">Kosta</span></li>
-              <li><span class="step-title">Assistants</span><span class="owner-badge owner-kosta">Kosta</span></li>
-              <li><span class="step-title">Actors</span><span class="owner-badge owner-grant">Grant</span></li>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="phase-item">
+          <div class="phase-number">2</div>
+          <div class="phase-content">
+            <h2 class="phase-title">Setup & Access</h2>
+            <ul class="steps-list">
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Email CreatorPay</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-creator">Creator</span>
+                  </div>
+                </div>
+              </li>
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Friend Kosta on FB</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-creator">Creator</span>
+                  </div>
+                </div>
+              </li>
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Join NM FB Group</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-kosta">Kosta</span>
+                    <span class="owner-badge owner-creator">Creator</span>
+                  </div>
+                </div>
+              </li>
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Complete Training Videos</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-creator">Creator</span>
+                  </div>
+                </div>
+              </li>
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Get Page via CRE Chat</div>
+                  <div class="substeps">
+                    <div class="substep-item">
+                      <div class="substep-icon"></div>
+                      <span class="step-title">Kosta sets up</span>
+                      <span class="owner-badge owner-kosta">Kosta</span>
+                    </div>
+                    <div class="substep-item">
+                      <div class="substep-icon"></div>
+                      <span class="step-title">Creator chooses name</span>
+                      <span class="owner-badge owner-creator">Creator</span>
+                    </div>
+                    <div class="substep-item">
+                      <div class="substep-icon"></div>
+                      <span class="step-title">Nic creates page</span>
+                      <span class="owner-badge owner-nic">Nic</span>
+                    </div>
+                  </div>
+                </div>
+              </li>
             </ul>
-          </li>
-        </ul>
-      </section>
-      <section class="phase">
-        <h2>Phase 5 – Monetization</h2>
-        <ul class="steps">
-          <li>
-            <div class="step-title">Unlock Monetization</div>
-            <!-- Only the creator is responsible for unlocking monetization -->
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
-          </li>
-          <li>
-            <div class="step-title">Request Setup from NM</div>
-            <!-- Creator initiates request; NM assists with setup -->
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span><span class="owner-badge owner-nm">NM</span></div>
-          </li>
-          <li>
-            <div class="step-title">Continue to Review Data</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
-          </li>
-          <li>
-            <div class="step-title">Double Down on What Is Performing</div>
-            <div class="step-owners"><span class="owner-badge owner-creator">Creator</span></div>
-          </li>
-        </ul>
-      </section>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="phase-item">
+          <div class="phase-number">3</div>
+          <div class="phase-content">
+            <h2 class="phase-title">Next Steps</h2>
+            <ul class="steps-list">
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Read NM Group posts</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-creator">Creator</span>
+                  </div>
+                </div>
+              </li>
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Join Relevant Chats</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-creator">Creator</span>
+                  </div>
+                </div>
+              </li>
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Make Videos</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-creator">Creator</span>
+                  </div>
+                </div>
+              </li>
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Review Data</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-creator">Creator</span>
+                  </div>
+                </div>
+              </li>
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Double Down on What Is Performing</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-creator">Creator</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="phase-item">
+          <div class="phase-number">4</div>
+          <div class="phase-content">
+            <h2 class="phase-title">Program Integration</h2>
+            <ul class="steps-list">
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Join Programs</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-creator">Creator</span>
+                    <span class="owner-badge owner-nm">NM</span>
+                  </div>
+                  <div class="substeps">
+                    <div class="substep-item">
+                      <div class="substep-icon"></div>
+                      <span class="step-title">Pods</span>
+                      <span class="owner-badge owner-nic">Nic</span>
+                    </div>
+                    <div class="substep-item">
+                      <div class="substep-icon"></div>
+                      <span class="step-title">Remix</span>
+                      <span class="owner-badge owner-nic">Nic</span>
+                    </div>
+                    <div class="substep-item">
+                      <div class="substep-icon"></div>
+                      <span class="step-title">Rewind & Review</span>
+                      <span class="owner-badge owner-kosta">Kosta</span>
+                    </div>
+                    <div class="substep-item">
+                      <div class="substep-icon"></div>
+                      <span class="step-title">Funded</span>
+                      <span class="owner-badge owner-kosta">Kosta</span>
+                    </div>
+                    <div class="substep-item">
+                      <div class="substep-icon"></div>
+                      <span class="step-title">Assistants</span>
+                      <span class="owner-badge owner-kosta">Kosta</span>
+                    </div>
+                    <div class="substep-item">
+                      <div class="substep-icon"></div>
+                      <span class="step-title">Actors</span>
+                      <span class="owner-badge owner-grant">Grant</span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Phase 5 -->
+        <div class="phase-item">
+          <div class="phase-number">5</div>
+          <div class="phase-content">
+            <h2 class="phase-title">Monetization</h2>
+            <ul class="steps-list">
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Unlock Monetization</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-creator">Creator</span>
+                  </div>
+                </div>
+              </li>
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Request Setup from NM</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-creator">Creator</span>
+                    <span class="owner-badge owner-nm">NM</span>
+                  </div>
+                </div>
+              </li>
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Continue to Review Data</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-creator">Creator</span>
+                  </div>
+                </div>
+              </li>
+              <li class="step-item">
+                <div class="step-icon"></div>
+                <div class="step-content">
+                  <div class="step-title">Double Down on What Is Performing</div>
+                  <div class="step-owners">
+                    <span class="owner-badge owner-creator">Creator</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+      <div class="progress-dot active"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
     </div>
   </main>
+
   <footer>
-    &copy; 2025 Network Media
+    <div class="container">
+      &copy; 2025 Network Media
+    </div>
   </footer>
+
+  <script>
+    // Simple scroll-based progress indicator
+    window.addEventListener('scroll', () => {
+      const phases = document.querySelectorAll('.phase-item');
+      const dots = document.querySelectorAll('.progress-dot');
+      const scrollTop = window.pageYOffset;
+      const windowHeight = window.innerHeight;
+      
+      phases.forEach((phase, index) => {
+        const rect = phase.getBoundingClientRect();
+        const isVisible = rect.top < windowHeight / 2 && rect.bottom > windowHeight / 2;
+        
+        if (isVisible) {
+          dots.forEach(dot => dot.classList.remove('active'));
+          if (dots[index]) {
+            dots[index].classList.add('active');
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>
